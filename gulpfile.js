@@ -49,7 +49,7 @@ gulp.task('scripts', function () {
             SRC_BASE + '/**/*.directive.js',
             SRC_BASE + '/**/*.controller.js'
         ], { base: '.' })
-        //.pipe(uglify())
+        .pipe(uglify())
         .pipe(concat('scripts.min.js'))
         .pipe(gulp.dest(DIST_BASE));
 });
