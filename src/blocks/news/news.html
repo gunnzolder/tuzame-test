@@ -1,10 +1,13 @@
+<button style="position: absolute; right:0; z-index: 999" ng-show="api=='NYTimes'" ng-click="showGivenApi()">Show given API</button>
+
+
 <section class="tuzame-news">
     <div class="tuzame-news__container" ng-show="ready">
         <button class="tuzame-news__button tuzame-news__button--prev" ng-disabled="index==0" ng-click="showNews('previous')">Prev</button>
-        <div class="tuzame-news__widget animated">
+        <div class="tuzame-news__widget tuzame-news__widget--NYTimes animated" ng-show="api=='NYTimes'">
             <header class="tuzame-news__header">
 
-                Tuzame news&nbsp;&nbsp;
+                NYTimes Feed&nbsp;&nbsp;
 
                 <span>/&nbsp;&nbsp;Article {{index+1}} of {{data.length}}</span>
 
@@ -24,6 +27,32 @@
                 </div>
             </main>
         </div>
+
+        <div class="tuzame-news__widget tuzame-news__widget--News animated" ng-show="api=='News'">
+            <header class="tuzame-news__header">
+
+                Tuzame news&nbsp;&nbsp;
+
+                <span>/&nbsp;&nbsp;Article {{index+1}} of {{data.length}}</span>
+
+            </header>
+            <main class="tuzame-news__content">
+                <div class="tuzame-news__content__image" ng-if="current.dynamic.image">
+                    <img err-src="http://placehold.it/150x150" ng-src="http://test-be.tsuru2.tuzame.com/api/storages/uploads/download/{{current.dynamic.image}}" alt="">
+                </div>
+                <div class="tuzame-news__content__news">
+                    <h2 class="tuzame-news__content__news__headline">
+                        <a ng-href="{{current.url}}" class="tuzame-news__content__news__link">{{current.dynamic.title}}</a>
+                    </h2>
+                    <div ng-bind-html="current.dynamic.body" class="tuzame-news__content__news__intro animated fadeIn">
+
+                    </div>
+
+                </div>
+            </main>
+        </div>
+
+
         <button class="tuzame-news__button tuzame-news__button--next" ng-disabled="index==data.length-1" ng-click="showNews('next')">Next</button>
     </div>
 
