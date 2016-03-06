@@ -17,7 +17,7 @@ var processors = [
 
 
 var SRC_BASE = './src',
-    DIST_BASE = './dist';
+    DIST_BASE = './app';
 
 /* JSDoc */
 gulp.task('jsdoc', function () {
@@ -49,7 +49,7 @@ gulp.task('scripts', function () {
             SRC_BASE + '/**/*.directive.js',
             SRC_BASE + '/**/*.controller.js'
         ], { base: '.' })
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(concat('scripts.min.js'))
         .pipe(gulp.dest(DIST_BASE));
 });
@@ -59,9 +59,8 @@ gulp.task('libs', function () {
             'node_modules/angular/angular.min.js',
             'node_modules/angular-resource/angular-resource.min.js',
             'node_modules/angular-sanitize/angular-sanitize.min.js',
+            'node_modules/angular-sanitize/angular-animate.min.js',
         ])
-        //.pipe(map(stripPaths))
-        //.pipe(uglify())
         .pipe(concat('libs.min.js'))
         .pipe(gulp.dest(DIST_BASE));
 });
@@ -75,7 +74,7 @@ gulp.task('templates', function () {
 
 gulp.task('resources', function () {
     gulp.src([
-            SRC_BASE + '/**/images/**/*.{jpg,png}'
+            SRC_BASE + '/**/images/**/*.{jpg,png,svg}'
         ], { base:  '.'})
         .pipe(map(stripPaths))
         .pipe(gulp.dest(DIST_BASE + '/images'));
