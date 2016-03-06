@@ -1,0 +1,32 @@
+<section class="tuzame-news">
+
+
+    <div class="tuzame-news__container">
+        <button class="tuzame-news__button tuzame-news__button--prev" ng-disabled="news.index==0" ng-click="news.showNews('previous')">Prev</button>
+        <div class="tuzame-news__widget">
+            <header class="tuzame-news__header">
+
+                Article {{news.index+1}} of {{news.data.length}}
+
+            </header>
+            <main class="tuzame-news__content">
+                <section class="tuzame-news__content__image" ng-if="news.current.multimedia">
+                    <a ng-href="{{news.current.url}}" class="tuzame-news__content__news__link">
+                        <img ng-src="{{news.current.thumbnail_standard}}" alt="tuzame-news__content__image">
+                    </a>
+                </section>
+                <section class="tuzame-news__content__news">
+                    <h2 class="tuzame-news__content__news__headline">
+                        <a ng-href="{{news.current.url}}" class="tuzame-news__content__news__link">{{news.current.title}}</a>
+                    </h2>
+                    <div class="tuzame-news__content__news__intro">
+                        {{news.current.abstract}}
+                    </div>
+
+                </section>
+            </main>
+        </div>
+        <button class="tuzame-news__button tuzame-news__button--next" ng-disabled="news.index==news.data.length-1" ng-click="news.showNews('next')">Next</button>
+    </div>
+
+</section>
