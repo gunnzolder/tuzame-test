@@ -9,7 +9,8 @@
     angular
         .module('tuzameApp', [
             'ngResource',
-            'ngSanitize'
+            'ngSanitize',
+            'ngAnimate',
         ]);
 
 })(angular);

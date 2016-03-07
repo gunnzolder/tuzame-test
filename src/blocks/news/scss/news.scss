@@ -1,6 +1,17 @@
+
 @import '../../../../node_modules/animate.scss/vendor/assets/stylesheets/animate';
-@import '../../../../node_modules/animate.scss/vendor/assets/stylesheets/animate/bounceIn';
 @import '../../../../node_modules/animate.scss/vendor/assets/stylesheets/animate/mixins';
+@import '../../../../node_modules/animate.scss/vendor/assets/stylesheets/animate/bounceIn';
+@import '../../../../node_modules/animate.scss/vendor/assets/stylesheets/animate/fadeInDown';
+@import '../../../../node_modules/animate.scss/vendor/assets/stylesheets/animate/bounceInDown';
+@import '../../../../node_modules/animate.scss/vendor/assets/stylesheets/animate/bounceOutDown';
+@import '../../../../node_modules/animate.scss/vendor/assets/stylesheets/animate/bounceOutUp';
+
+$animation-enter: fadeInDown;
+$animation-enter-duration: .5s;
+$animation-leave: bounceOutDown;
+$animation-leave-duration: .8s;
+
 
 $block-name: "tuzame-news";
 
@@ -8,7 +19,8 @@ $block-name: "tuzame-news";
 
 $font-header: 'Teko', sans-serif;
 $font-body: 'Lato', sans-serif;
-$animation: bounceIn;
+
+
 
 .#{$block-name} {
   display: flex;
@@ -23,16 +35,28 @@ $animation: bounceIn;
     height: auto;
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
 
   &__widget {
     width: 100%;
-    max-width: 500px;
-    display: none;
-    &.animated {
+    &__wrap {
+      width: 100%;
+      min-width: 250px;
+      max-width: 500px;
       display: block;
-      @include animate($animation, 1s);
+      position: relative;
     }
+    &.ng-enter {
+      @include animate($animation-enter, $animation-enter-duration);
+      animation-delay: $animation-leave-duration - $animation-enter-duration;
+    }
+    &.ng-leave {
+      @include animate($animation-leave, $animation-leave-duration);
+      position: absolute;
+      top:-50px;
+    }
+
   }
   &__header {
     display: flex;
@@ -63,7 +87,6 @@ $animation: bounceIn;
       position: absolute;
       top: -63px;
       right: 20px;
-      @include animate(fadeIn, 1s);
       img {
         height: 75px;
         border-radius: 50%;
@@ -103,9 +126,10 @@ $animation: bounceIn;
     -moz-appearance: none;
     background: transparent;
     border: 0;
-    padding: 0 20px;
     cursor: pointer;
-    border-radius:0 4px 4px 0;
+    border-radius:0 50% 50% 0;
+    height: 50px;
+    width: 50px;
 
     background-image: url(images/next.svg);
     background-repeat: no-repeat;
@@ -113,7 +137,6 @@ $animation: bounceIn;
     opacity: .6;
 
     text-indent: -10000px;
-
     &:disabled {
       opacity:.3;
       &:hover {
@@ -135,11 +158,14 @@ $animation: bounceIn;
   }
   
   &__spinner {
-    width: 30px;
-    height: 30px;
-    //background: red;
-    background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 26 26' enable-background='new 0 0 26 26' xml:space='preserve'> <rect x='12.2' y='2.4' width='1.6' height='5.7'/> <polygon opacity='0.6' points='16.1,16.8 18.9,21.8 17.5,22.6 14.7,17.6 '/> <polygon opacity='0.92' points='14.7,8.4 17.6,3.4 18.9,4.2 16.1,9.2 '/> <polygon opacity='0.68' points='21.8,18.9 16.8,16.1 17.6,14.7 22.6,17.5 '/> <polygon opacity='0.84' points='16.8,9.9 21.8,7.1 22.6,8.4 17.6,11.3 '/> <polygon opacity='0.2' points='9.2,9.9 8.4,11.3 3.4,8.4 4.2,7.1 '/> <polygon opacity='0.12' points='7,4.2 8.4,3.4 11.2,8.4 9.8,9.2 '/> <polygon opacity='0.36' points='9.2,16.1 4.2,18.9 3.4,17.5 8.4,14.7 '/> <polygon opacity='0.44' points='8.4,22.6 7.1,21.8 9.9,16.8 11.3,17.6 '/> <rect x='2.4' y='12.2' opacity='0.28' width='5.7' height='1.6'/> <rect x='12.2' y='17.9' opacity='0.52' width='1.6' height='5.7'/> <rect x='17.9' y='12.2' opacity='0.76' width='5.7' height='1.6'/> </svg>");
-    animation: spin 1.5s steps(12) infinite;
+    &::after {
+      content: "";
+      display: block;
+      width: 30px;
+      height: 30px;
+      background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 26 26' enable-background='new 0 0 26 26' xml:space='preserve'> <rect x='12.2' y='2.4' width='1.6' height='5.7'/> <polygon opacity='0.6' points='16.1,16.8 18.9,21.8 17.5,22.6 14.7,17.6 '/> <polygon opacity='0.92' points='14.7,8.4 17.6,3.4 18.9,4.2 16.1,9.2 '/> <polygon opacity='0.68' points='21.8,18.9 16.8,16.1 17.6,14.7 22.6,17.5 '/> <polygon opacity='0.84' points='16.8,9.9 21.8,7.1 22.6,8.4 17.6,11.3 '/> <polygon opacity='0.2' points='9.2,9.9 8.4,11.3 3.4,8.4 4.2,7.1 '/> <polygon opacity='0.12' points='7,4.2 8.4,3.4 11.2,8.4 9.8,9.2 '/> <polygon opacity='0.36' points='9.2,16.1 4.2,18.9 3.4,17.5 8.4,14.7 '/> <polygon opacity='0.44' points='8.4,22.6 7.1,21.8 9.9,16.8 11.3,17.6 '/> <rect x='2.4' y='12.2' opacity='0.28' width='5.7' height='1.6'/> <rect x='12.2' y='17.9' opacity='0.52' width='1.6' height='5.7'/> <rect x='17.9' y='12.2' opacity='0.76' width='5.7' height='1.6'/> </svg>");
+      animation: spin 1.5s steps(12) infinite;
+    }
   }
   
 }
@@ -157,7 +183,10 @@ $animation: bounceIn;
   .#{$block-name} {
 
     &__widget {
-      min-width: 500px;
+      &__wrap {
+        min-height: 150px;
+        min-width: 500px;
+      }
     }
   }
 }
@@ -170,5 +199,4 @@ $animation: bounceIn;
   }
 }
 
-@keyframes fade-in { from { opacity:0} to { opacity: 1}}
 @keyframes spin{to{transform:rotate(360deg);}}

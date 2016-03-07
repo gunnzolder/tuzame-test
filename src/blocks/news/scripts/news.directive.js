@@ -8,9 +8,9 @@
 
 
 
-    newsWidget.$inject = ['NYTimes','News','$animate'];
+    newsWidget.$inject = ['NYTimes','News'];
 
-    function newsWidget(NYTimes,News,$animate) {
+    function newsWidget(NYTimes,News) {
 
         var directive = {
             link: link,
@@ -52,18 +52,15 @@
             }
 
             scope.showNews = function(direction){
-
-                var widget = angular.element(document.querySelector('.tuzame-news__widget--'+scope.api));
-
-                $animate.removeClass(widget, 'animated').then(function() {
-                    widget.addClass('animated');
-                });
-
                 if (scope.index>=0 && scope.index < scope.data.length && direction) {
                     (direction == 'next') ? scope.index++ : scope.index-- ;
                 }
                 scope.current = scope.data[scope.index];
             };
+
+
+
+
         }
     }
 

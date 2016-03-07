@@ -2,33 +2,34 @@
 
 
 <section class="tuzame-news">
-    <div class="tuzame-news__container" ng-show="ready">
+    <div class="tuzame-news__container" ng-if="ready">
         <button class="tuzame-news__button tuzame-news__button--prev" ng-disabled="index==0" ng-click="showNews('previous')">Prev</button>
-        <div class="tuzame-news__widget tuzame-news__widget--NYTimes animated" ng-show="api=='NYTimes'">
-            <header class="tuzame-news__header">
+        <div class="tuzame-news__widget__wrap">
+            <div class="tuzame-news__widget tuzame-news__widget--NYTimes" ng-repeat="current in [current]" ng-if="api=='NYTimes'">
+                <header class="tuzame-news__header">
 
-                NYTimes Feed&nbsp;&nbsp;
+                    NYTimes Feed&nbsp;&nbsp;
 
-                <span>/&nbsp;&nbsp;Article {{index+1}} of {{data.length}}</span>
+                    <span>/&nbsp;&nbsp;Article {{index+1}} of {{data.length}}</span>
 
-            </header>
-            <main class="tuzame-news__content">
-                <div class="tuzame-news__content__image" ng-show="current.multimedia">
-                        <img ng-show="current.thumbnail_standard" ng-src="{{current.thumbnail_standard}}" alt="tuzame-news__content__image">
-                </div>
-                <div class="tuzame-news__content__news">
-                    <h2 class="tuzame-news__content__news__headline">
-                        <a ng-href="{{current.url}}" class="tuzame-news__content__news__link">{{current.title}}</a>
-                    </h2>
-                    <div ng-show="current.abstract" class="tuzame-news__content__news__intro animated fadeIn">
-                        {{current.abstract}}
+                </header>
+                <main class="tuzame-news__content">
+                    <div class="tuzame-news__content__image" ng-show="current.multimedia">
+                            <img ng-show="current.thumbnail_standard" ng-src="{{current.thumbnail_standard}}" alt="tuzame-news__content__image">
                     </div>
+                    <div class="tuzame-news__content__news">
+                        <h2 class="tuzame-news__content__news__headline">
+                            <a ng-href="{{current.url}}" class="tuzame-news__content__news__link">{{current.title}}</a>
+                        </h2>
+                        <div ng-show="current.abstract" class="tuzame-news__content__news__intro animated fadeIn">
+                            {{current.abstract}}
+                        </div>
 
-                </div>
-            </main>
-        </div>
+                    </div>
+                </main>
+            </div>
 
-        <div class="tuzame-news__widget tuzame-news__widget--News animated" ng-show="api=='News'">
+        <div class="tuzame-news__widget tuzame-news__widget--News" ng-repeat="current in [current]" ng-show="api=='News'">
             <header class="tuzame-news__header">
 
                 Tuzame news&nbsp;&nbsp;
@@ -52,10 +53,11 @@
             </main>
         </div>
 
+        </div>
 
         <button class="tuzame-news__button tuzame-news__button--next" ng-disabled="index==data.length-1" ng-click="showNews('next')">Next</button>
     </div>
 
-    <div class="tuzame-news__spinner" ng-hide="ready"></div>
+    <div class="tuzame-news__spinner" ng-if="!ready"></div>
 
 </section>

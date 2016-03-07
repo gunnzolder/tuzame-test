@@ -59,7 +59,7 @@ gulp.task('libs', function () {
             'node_modules/angular/angular.min.js',
             'node_modules/angular-resource/angular-resource.min.js',
             'node_modules/angular-sanitize/angular-sanitize.min.js',
-            'node_modules/angular-sanitize/angular-animate.min.js',
+            'node_modules/angular-animate/angular-animate.min.js',
         ])
         .pipe(concat('libs.min.js'))
         .pipe(gulp.dest(DIST_BASE));
