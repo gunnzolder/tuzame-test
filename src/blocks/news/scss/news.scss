@@ -31,6 +31,7 @@ $font-body: 'Lato', sans-serif;
   justify-content: center;
   background-image: url(images/Fog-Forest-Nature-Background-For-Wallpaper-6400127.jpg);
   background-size: cover;
+  overflow: hidden;
   &__container {
     height: auto;
     display: flex;
